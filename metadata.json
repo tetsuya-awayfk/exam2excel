@@ -1,0 +1,5 @@
+{
+  "name": "Exam2Excel Converter",
+  "description": "Convert PDF exams into structured Excel files using AI parsing.",
+  "requestFramePermissions": []
+}
