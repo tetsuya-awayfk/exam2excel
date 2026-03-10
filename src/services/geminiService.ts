@@ -76,6 +76,14 @@ export async function parseExamFile(file: File): Promise<ExamQuestion[]> {
     - This ensures the data is readable in both the app and Excel.
     - Ensure LaTeX is valid and readable.
 
+    UNIT INHERITANCE RULE (CRITICAL):
+    - If the question asks for a quantity IN a specific unit (e.g., "find the resistance in ohms", "what is the impedance in Ω", "solve for voltage in V"), then EVERY answer option that is a bare number MUST include that unit.
+    - Examples:
+      - Question: "Find the equivalent resistance in ohms." Options: "100", "200", "500", "1000" → MUST become "100 Ω", "200 Ω", "500 Ω", "1000 Ω".
+      - Question: "What is the voltage in volts?" Options: "12", "24" → MUST become "12 V", "24 V".
+    - This rule applies to ALL questions, not just specific ones.
+    - Never leave a bare number as an answer option when the question clearly specifies a unit.
+
     STRICT OPTION CONTENT RULE:
     - "option1" MUST contain the full text content of Option A.
     - "option2" MUST contain the full text content of Option B.
@@ -96,7 +104,7 @@ export async function parseExamFile(file: File): Promise<ExamQuestion[]> {
     - Even if options contain complex symbols, they MUST be extracted completely using LaTeX or the literal symbol.
     - Some question numbers may be in parentheses like "(5)." or "(12).". These MUST be included.
     - Options might be on the same line (e.g., "A. 1 B. 2 C. 3 D. 4"). You MUST split them.
-    - Pay extreme attention to Question No. 1, 5, 12, 26, 31, 35, 42, 43, 50, 52, 55, 57, 61, 63, 66, 72, 73, 77, 84, 85, 89, 90, 96, 99. Ensure their options are NOT blank and symbols are preserved.
+    - For EVERY question without exception, ensure options are NOT blank and that all symbols (Ω, °, V, A, Hz, etc.) are preserved and units are inherited from the question stem into bare-number options.
 
     SYMBOL INSTRUCTION:
     - Use the literal symbols (Ω, %, °, etc.) or LaTeX ($...$) for mathematical expressions.
